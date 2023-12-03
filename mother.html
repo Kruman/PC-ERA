@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Tienda</title>
+<link rel="stylesheet" href="css/estilos.css">
+<style type="text/css">   
+	body {
+		background-image:url(img/fondotec.webp);
+		font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	}
+	#inputs {
+		border:5px inset rgb(153,204,255);
+		width: 60px;
+		background:rgb(148,204,252);
+		text-align : center;
+	}
+	#boton  {
+		background: rgb(102,153,204) border:1px outset rgb(94,71,159);
+		width:80px;
+		font : 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+		background-color : #FFFACD;
+		color : #4B0082;
+	}
+</style>
+<script></script>
+<script type="text/javascript">
+function meterencarro(formu) {
+unidades=formu.numpedido.value;
+descripcion=formu.producto.value;
+if (confirm("Se a añadido el productoa la compra.\n\n " + descripcion)) {
+numeroregistro = 0;  
+numeroregistro = getcookie("numerodeorden");
+numeroregistro++;
+if ( numeroregistro > 5 )
+     alert("ATENCIÓN\nSu carrito esta lleno.\nPor favor, acceda a la hoja de pedido.\nGracias.");
+else {
+actualizarbase = formu.numpedido.value + "|"  + formu.precio.value  + "|" + formu.referencia.value + "|" + formu.producto.value;
+nuevopedido = "Order." + numeroregistro;
+setcookie (nuevopedido, actualizarbase, null, "/");
+setcookie ("numerodeorden", numeroregistro, null, "/");
+
+aviso = "PRODUCTO SELECCIONADO\n\n" + "Cantidad: " + unidades + " unidad/es.\n"
++ "Producto: \n" + descripcion + ".\n\nPulse sobre el Carro para acceder\na su lista de compra.\nGracias";
+alert(aviso);
+}
+}
+}
+
+function getcookieval (offset) {
+  var endstr = document.cookie.indexOf (";", offset);
+  if (endstr == -1)
+  endstr = document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+
+function getcookie (name) {
+   var arg = name + "=";
+   var alen = arg.length;
+   var clen = document.cookie.length;
+   var i = 0;
+   while (i < clen)
+        {
+        var j = i + alen;
+        if (document.cookie.substring(i, j) == arg) return getcookieval (j);
+        i = document.cookie.indexOf(" ", i) + 1;
+        if (i == 0) break;
+        }
+   return null;
+}
+
+function setcookie (name,value,expires,path,domain,secure) {
+   document.cookie = name + "=" + escape (value) +
+      ((expires) ? "; expires=" + expires.toGMTString() : "") +
+      ((path) ? "; path=" + path : "") +
+      ((domain) ? "; domain=" + domain : "") +
+      ((secure) ? "; secure" : "");
+}
+</script>
+</head><body><div>
+<a href="formulario.html"><img src="img/usuario.png" width="50"height="50" align="left"></a>
+<a href="formulario.html"><img src="img/registro.webp" width="150"height="60" align="left"></a>
+<a href="pedido.html"><img src="img/carrito.png" width="50"height="50" align="right"></a></div>
+<div>
+   <br>
+   <br>
+   <br>
+
+<H1 align="center">Placas Madre<strong><img src="img/mother.png" width="70" height="70"/></strong><br />
+</H1></div>
+<center><table  align="center"  width="1000"border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/azul4.jpg">
+   <thead>
+      <tr>
+            <th style="padding: 0px 50px;"><a href="gpu.html">TARJETAS GRAFICAS</th > 
+            <th style="padding: 0px 50px;"><a href="cpu.html">PROSESADORES</th>
+              <th style="padding: 0px 50px;"><a href="pantallas.html">PANTALLAS</th > 
+            <th style="padding: 0px 50px;"><a href="fuente.html">FUENTES DE PODER</th>
+            <th style="padding: 0px 50px;"><a href="peri.html">PERIFERICOS</th>
+            </tr>
+   </thead>
+<table style="text-align:center;" width="900" border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/fondo4.jpg">
+<tbody>
+<tr style="font: bold">
+<td width="20" >Imagen </td>
+<td width="100" >Descripcion</td>
+<td width="80" >Presio </td>
+<td width="150" >Comprar</td></tr>
+<tr>
+<td><img src="img/mother1.webp" width="200" height="150" border="1" alt="ASUS ATX ROG Strix X570-E" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Tarjeta Madre ASUS ATX ROG Strix X570-E Gaming WiFi II, S-AM4, AMD X570, HDMI, 128GB DDR4 para AMD ― Requiere Actualización de BIOS para la Serie Ryzen 5000
+</td>
+<td valign="top"> $7,389.00 </td>
+<td valign="top">
+  <table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form  action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="7389.00" name="precio" />
+<input type="hidden" value="ASUS ATX ROG Strix X570-E" name="producto" /> 
+<input type="hidden" value="ID101" name="referencia" /></center>
+</form>
+</td></tr></table>
+</td></tr>
+<tr>
+<td><img src="img/mother2.jpg" width="200" height="150" border="1" alt="ASUS A320M-K Prime" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">ASUS A320M-K Prime - Tarjeta Madre, AMD A320 Ryzen AM4, mATX con iluminación LED, DDR4 a 3200MHz, 32Gbps M.2, HDMI, SATA 6Gbps, USB 3.0
+Visita la Store de Asus</td>
+<td valign="top"> $1,047.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="1047.00" name="precio" />
+<input type="hidden" value="ASUS A320M-K Prime" name="producto" /> 
+<input type="hidden" value="ID201" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr >
+<td><img src="img/mother3.webp" width="200" height="150" border="1" alt="ASUS ATX ROG Maximus Z690 HERO EVA" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Tarjeta Madre ASUS ATX ROG Maximus Z690 HERO EVA, S-1700, Intel Z690, HDMI, 128GB DDR5 para Intel Requiere Actualización de BIOS para Procesadores Intel 13va. Generación</td>
+<td valign="top"> $16,539.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td  colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="$16539.00" name="precio" />
+<input type="hidden" value="ASUS ATX ROG Maximus Z690 HERO EVA" name="producto" /> 
+<input type="hidden" value="ID33" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr>
+<td><img src="img/mother4.jpg" width="200" height="150" border="1" alt="ROG Strix B550-F" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Asus Tarjeta Madre ROG Strix B550-F Gaming AMD 3rd Gen AMD Ryzen™ Procesador Socket AM4 B550</td>
+<td valign="top"> $5,469,00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="5469.00" name="precio" />
+<input type="hidden" value="ROG Strix B550-F" name="producto" /> 
+<input type="hidden" value="ID402" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr>
+<td><img src="img/mother5.webp" width="200" height="150" border="1" alt=" Gigabyte Micro ATX B560M" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Tarjeta Madre Gigabyte Micro ATX B560M DS3H V2, S-1200, Intel B560 Express, HDMI, 128GB DDR4 para Intel</td>
+<td valign="top"> $1,519.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="1519.00" name="precio" />
+<input type="hidden" value=" Gigabyte Micro ATX B560M" name="producto" /> 
+<input type="hidden" value="ID02" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+</tbody></table>
+</body>
+</html>

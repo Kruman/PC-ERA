@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Tienda</title>
+<link rel="stylesheet" href="css/estilos.css">
+<style type="text/css">   
+	body {
+		background-image:url(img/fondotec.webp);
+		font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	}
+	#inputs {
+		border:5px inset rgb(153,204,255);
+		width: 60px;
+		background:rgb(148,204,252);
+		text-align : center;
+	}
+	#boton  {
+		background: rgb(102,153,204) border:1px outset rgb(94,71,159);
+		width:80px;
+		font : 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+		background-color : #FFFACD;
+		color : #4B0082;
+	}
+</style>
+<script></script>
+<script type="text/javascript">
+function meterencarro(formu) {
+unidades=formu.numpedido.value;
+descripcion=formu.producto.value;
+if (confirm("Se a añadido el productoa la compra.\n\n " + descripcion)) {
+numeroregistro = 0;  
+numeroregistro = getcookie("numerodeorden");
+numeroregistro++;
+if ( numeroregistro > 5 )
+     alert("ATENCIÓN\nSu carrito esta lleno.\nPor favor, acceda a la hoja de pedido.\nGracias.");
+else {
+actualizarbase = formu.numpedido.value + "|"  + formu.precio.value  + "|" + formu.referencia.value + "|" + formu.producto.value;
+nuevopedido = "Order." + numeroregistro;
+setcookie (nuevopedido, actualizarbase, null, "/");
+setcookie ("numerodeorden", numeroregistro, null, "/");
+
+aviso = "PRODUCTO SELECCIONADO\n\n" + "Cantidad: " + unidades + " unidad/es.\n"
++ "Producto: \n" + descripcion + ".\n\nPulse sobre el Carro para acceder\na su lista de compra.\nGracias";
+alert(aviso);
+}
+}
+}
+
+function getcookieval (offset) {
+  var endstr = document.cookie.indexOf (";", offset);
+  if (endstr == -1)
+  endstr = document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+
+function getcookie (name) {
+   var arg = name + "=";
+   var alen = arg.length;
+   var clen = document.cookie.length;
+   var i = 0;
+   while (i < clen)
+        {
+        var j = i + alen;
+        if (document.cookie.substring(i, j) == arg) return getcookieval (j);
+        i = document.cookie.indexOf(" ", i) + 1;
+        if (i == 0) break;
+        }
+   return null;
+}
+
+function setcookie (name,value,expires,path,domain,secure) {
+   document.cookie = name + "=" + escape (value) +
+      ((expires) ? "; expires=" + expires.toGMTString() : "") +
+      ((path) ? "; path=" + path : "") +
+      ((domain) ? "; domain=" + domain : "") +
+      ((secure) ? "; secure" : "");
+}
+</script>
+</head><body><div>
+<a href="formulario.html"><img src="img/usuario.png" width="50"height="50" align="left"></a>
+<a href="formulario.html"><img src="img/registro.webp" width="150"height="60" align="left"></a>
+<a href="pedido.html"><img src="img/carrito.png" width="50"height="50" align="right"></a></div>
+<div>
+   <br>
+   <br>
+   <br>
+
+<H1 align="center">Procesadores<strong><img src="img/cpu.png" width="70" height="70"/></strong><br />
+</H1></div>
+<center><table  align="center"  width="1000"border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/azul4.jpg">
+   <thead>
+      <tr>
+            <th style="padding: 0px 50px;"><a href="gpu.html">TARJETAS GRAFICAS</th > 
+            <th style="padding: 0px 50px;"><a href="pantallas.html">PANTALLAS</th>
+              <th style="padding: 0px 50px;"><a href="mother.html">MOTHERBOARD</th > 
+            <th style="padding: 0px 50px;"><a href="fuente.html">FUENTES DE PODER</th>
+            <th style="padding: 0px 50px;"><a href="peri.html">PERIFERICOS</th>
+            </tr>
+   </thead>
+<table style="text-align:center;" width="900" border="5" cellspacing="2" cellpadding="5" style="font: 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;" background = "img/fondo4.jpg">
+<tbody>
+<tr style="font: bold">
+<td width="20" >Imagen </td>
+<td width="100" >Descripcion</td>
+<td width="80" >Presio </td>
+<td width="150" >Comprar</td></tr>
+<tr>
+<td><img src="img/amd5.jpg" width="200" height="150" border="1" alt="CPU AMD 5" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">AMD Procesador Ryzen™ 5 5600G - 6 núcleos de CPU - Socket-AM4-3.90GHz - 16MB L3 Cache - Incluye Disipador Wraith Stealth
+</td>
+<td valign="top"> $2,168.00 </td>
+<td valign="top">
+  <table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form  action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="2168.00" name="precio" />
+<input type="hidden" value="CPU AMD 5" name="producto" /> 
+<input type="hidden" value="ID101" name="referencia" /></center>
+</form>
+</td></tr></table>
+</td></tr>
+<tr>
+<td><img src="img/AMD7.webp" width="200" height="150" border="1" alt="CPU AMD 7" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Procesador AMD Ryzen 7 5700G, S-AM4, 3.80GHz, 8-Core, 16MB L3 Caché - incluye Disipador Wraith Stealth</td>
+<td valign="top"> $3,779.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="3779.00" name="precio" />
+<input type="hidden" value="CPU AMD 5" name="producto" /> 
+<input type="hidden" value="ID201" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr >
+<td><img src="img/AMD9.webp" width="200" height="150" border="1" alt="CPU AMD 9" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Procesador AMD Ryzen 9 5900X, S-AM4, 3.70GHz, 64MB L3 Cache - no incluye Disipador</td>
+<td valign="top"> $ 6,929.50 </td>
+<td valign="top">
+<table>
+<tr>
+<td  colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="6929.00" name="precio" />
+<input type="hidden" value="CPU AMD 9" name="producto" /> 
+<input type="hidden" value="ID33" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr>
+<td><img src="img/i7.webp" width="200" height="150" border="1" alt="Intel 7" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Procesador Intel Core i7-12700, S-1700, 2.10GHz, 12-Core, 25MB Smart Cache (12va. Generación - Alder Lake)</td>
+<td valign="top"> $6,779.00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="6779.00" name="precio" />
+<input type="hidden" value="Intel 7" name="producto" /> 
+<input type="hidden" value="ID402" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+<tr>
+<td><img src="img/i9.webp" width="200" height="150" border="1" alt="Intel 9" /></td>
+<td valign="top" style="font: 9pt; text-align: justify;">Procesador Intel Core i9-12900K Intel UHD Graphics 770, S-1700, 3.20GHz, 16-Core, 30MB Smart Cache (12va. Generación - Alder Lake)</td>
+<td valign="top"> $11,509,00 </td>
+<td valign="top">
+<table>
+<tr>
+<td colspan="3" align="center" style="font: 7pt; color: #191970;">Cantidad</td></tr>
+<tr><td>
+<form action="" name="order" id="order">
+<input onclick="meterencarro(this.form)" type="button" id="boton" value="Añadir" /><br />
+<input maxlength="2" id="inputs" size="2" value="1" name="numpedido" /><br />
+<a href="pedido.html"><img src="img/carrito.png" width="50" height="50" border="0" alt="" /></a><br />
+<input type="hidden" value="11509.00" name="precio" />
+<input type="hidden" value="Intel 9" name="producto" /> 
+<input type="hidden" value="ID02" name="referencia" />
+</form>
+</td></tr></table>
+</td>
+</tr>
+</tbody></table>
+</body>
+</html>
